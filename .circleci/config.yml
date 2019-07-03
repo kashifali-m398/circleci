@@ -1,24 +1,22 @@
 version: 2.0
 jobs:
   Pre-Deploy:
-    build:
-      docker:
-        - image: alpine:3.7
-      steps:
-        - run:
-            name: The First Step
-            command: |
-              echo 'Hello World!'
-              echo 'This is the delivery pipeline'
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
   Fetch-Code:
-    build:
-      docker:
-        - image: alpine:3.7
-      steps:
-        - checkout
-        - run:
-            name: Code is fetched
-            command: |
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: Code is fetched
+          command: |
             echo 'Look maa i fetched the code'
   Deploy:
     docker:
