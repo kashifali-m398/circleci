@@ -35,10 +35,10 @@ workflows:
       - Fetch-Code:
           requires:
             - Pre-Deploy
-      - Approve-To-Fetch:
-        type: approval
-        requires:
-          - Fetch-Code
+      - Hold-For-Approval:
+          type: approval
+          requires:
+            - Fetch-Code
       - Deploy:
           requires:
-            - Approve-To-Fetch
+            - Hold-For-Approval
