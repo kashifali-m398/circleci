@@ -1,11 +1,46 @@
 version: 2.0
 jobs:
-  build:
+  Pre-Deploy:
+    build:
+      docker:
+        - image: alpine:3.7
+      steps:
+        - run:
+            name: The First Step
+            command: |
+              echo 'Hello World!'
+              echo 'This is the delivery pipeline'
+  Fetch-Code:
+    build:
+      docker:
+        - image: alpine:3.7
+      steps:
+        - checkout
+        - run:
+            name: Code is fetched
+            command: |
+            echo 'Look maa i fetched the code'
+  Deploy:
     docker:
       - image: alpine:3.7
     steps:
       - run:
-          name: The First Step
+          name: Approval Complete
           command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+            echo 'Do work once the approval has completed'
+
+workflows:
+  version: 2.0
+  My_Workflow:
+    jobs:
+      - Pre-Deploy
+      - Fetch-Code
+          requires:
+            - Pre-Deploy
+      - Approve-To-Fetch:
+        type: approval
+        requires:
+          - Fetch-Code
+      - Deploy:
+        - requires:
+            - Approve-To-Fetch
