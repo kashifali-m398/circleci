@@ -28,7 +28,7 @@ jobs:
             echo 'Do work once the approval has completed'
 
 workflows:
-  version: 2.0
+  version: 2
   My_Workflow:
     jobs:
       - Pre-Deploy
