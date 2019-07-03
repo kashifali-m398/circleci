@@ -32,7 +32,7 @@ workflows:
   My_Workflow:
     jobs:
       - Pre-Deploy
-      - Fetch-Code
+      - Fetch-Code:
           requires:
             - Pre-Deploy
       - Approve-To-Fetch:
@@ -40,5 +40,5 @@ workflows:
         requires:
           - Fetch-Code
       - Deploy:
-        - requires:
+          requires:
             - Approve-To-Fetch
